@@ -11,6 +11,7 @@ The program is built using python, Flask and sqlalchemy(PostgreSQL), and can be 
 The app can be accessed through ssh by using the following steps:
 
 SSH Port: 2200
+
 Public IP Address: 54.209.205.198
 
 On your local machine's terminal, enter:
@@ -26,49 +27,81 @@ The app was made live using AWS LightSail (Ubuntu on a Linux remote server) usin
 ##Sign up and instance set up for AWS
 
 Sign up for [AWS](https://lightsail.aws.amazon.com/)
+
 Create an instance
+
 Choose Ubuntu
+
 Rename instance
+
 SSH into the instance using the 'Connect using SSH' button
 
 ##Updates
 
 Run the following commands to update and upgrade packages
+
 sudo apt-get update
+
 sudo apt-get upgrade
 
 ##Installation
 
 Run the following commands to install packages needed for the project:
+
 sudo apt-get install apache2
+
 sudo apt-get install libapache2-mod-wsgi
+
 sudo apt-get install postgresql
+
 sudo apt-get install postgresql postgresql-contrib
+
 sudo apt-get install python-setuptools python-dev build-essential
+
 sudo easy_install pip
+
 sudo pip install --upgrade virtualenv
+
 sudo pip install Flask
+
 sudo pip install sqlalchemy
+
 sudo apt-get install finger
+
 sudo apt-get install python-oauth2client
+
 sudo pip install requests
+
 sudo apt-get install git
+
 sudo apt-get install ntp
+
 sudo apt-get install python-psycopg2
 
 ##Setting up Uncomplicated Firewall and access ports
 
 sudo ufw allow ssh
+
 sudo ufw allow 2200/tcp
+
 sudo ufw allow www
+
 sudo ufw enable
+
 sudo ufw allow http
+
 sudo ufw allow 80
+
 sudo ufw allow ntp
+
 sudo ufw allow 123/tcp
+
 sudo ufw status
+
 sudo ufw deny 22/tcp 
+
 sudo ufw default deny incoming
+
 sudo ufw default allow outgoing
 
 ##Setting Time Zone
@@ -78,32 +111,46 @@ sudo timedatectl set_timezone Etc/UTC
 ##User creation and giving sudo access
 
 sudo adduser grader
+
 sudo nano /etc/sudoers.d/grader 
+
 paste the following in grader file
 grader ALL = (ALL) NOPASSWD:ALL
 
 ##Setting up SSH Access for grader
 
 ssh-keygen -t rsa (on local machine)
+
 su grader (on AWS SSH terminal)
+
 sudo mkdir .ssh (in grader's home dir.)
+
 sudo nano .ssh/authorized_keys
 (paste public key created through keygen for grader in this file)
+
 sudo nano .ssh/graderkey.pub
 (paste public key created through keygen for grader in this file)
+
 sudo nano .ssh/graderkey
 (paste private key created through keygen for grader in this file)
+
 sudo chown grader:grader .ssh (in grader’s home directory)
+
 sudo chown grader:grader authorized_keys (in .ssh directory in grader’s home directory)
+
 sudo chown grader:grader graderkey (in .ssh directory in grader’s home directory)
+
 sudo chown grader:grader graderkey.pub (in .ssh directory in grader’s home directory)
+
 sudo nano /etc/ssh/sshd_config (on AWS SSH terminal)
+
 remove port 22 and add port 2200 here
 
 ##Disabling SSH Access for root
 
 sudo nano /etc/ssh/sshd_config
 change PermitRootLogin permissions to no
+
 sudo service sshd restart (so that changes made take effect)
 
 ##Configuration
@@ -113,15 +160,22 @@ touch catalog.wsgi /var/www/html
 
 sudo nano catalog.wsgi
 (paste the following in catalog.wsgi)
+
 import sys
+
 import logging
+
 logging.basicConfig(stream=sys.stderr)
+
 sys.path.insert(0, '/var/www/html/')
+
 from catalog.catalog import app as application
+
 application.secret_key = 'super_secret_key'
 
 sudo nano /etc/apache2/sites-enabled/000-default.conf
 (update contents of file to the following)
+
 <VirtualHost *:80>
 	ServerName 54.209.205.198
 	ServerAdmin admin@54.209.205.198
