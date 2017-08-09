@@ -83,6 +83,7 @@ paste the following in grader file
 grader ALL = (ALL) NOPASSWD:ALL
 
 ##Setting up SSH Access for grader
+
 ssh-keygen -t rsa (on local machine)
 su grader (on AWS SSH terminal)
 sudo mkdir .ssh (in grader's home dir.)
@@ -100,11 +101,13 @@ sudo nano /etc/ssh/sshd_config (on AWS SSH terminal)
 remove port 22 and add port 2200 here
 
 ##Disabling SSH Access for root
+
 sudo nano /etc/ssh/sshd_config
 change PermitRootLogin permissions to no
 sudo service sshd restart (so that changes made take effect)
 
 ##Configuration
+
 touch catalog.wsgi /var/www/html
 (create a catalog.wsgi file)
 
@@ -136,6 +139,7 @@ sudo nano /etc/apache2/sites-enabled/000-default.conf
 </VirtualHost>
 
 ##Database Setup
+
 sudo –u postgres psql postgres
 \password postgres (type new password twice)
 sudo su – postgres
@@ -157,6 +161,7 @@ host     all   all   127.0.0.1/0   md5
 hostssl  all   all   127.0.0.1/0   md5
 
 ##Code Layout
+
 Database set up is in database_setup.py
 Helper functions are in utilities.py
 All handlers are in project.py
