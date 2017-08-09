@@ -195,31 +195,48 @@ sudo nano /etc/apache2/sites-enabled/000-default.conf
 ##Database Setup
 
 sudo –u postgres psql postgres
+
+
 \password postgres (type new password twice)
+
 sudo su – postgres
+
 psql
+
 \password (enter password)
+
 \q (quit)
+
 createuser --interactive
 (username = catalog)
+
 createdb catalog
+
 ALTER DATABASE catalog OWNER TO catalog
+
 ALTER ROLE catalog WITH NOCREATEDB
 
 sudo nano /etc/postgresql/9.5/main/postgresql.conf
+
 listen_addresses = '*' (edit)
 
 sudo nano /etc/postgresql/9.5/main/pg_hba.conf
 (add the following to pg_hba.conf)
+
 host     all   all   127.0.0.1/0   md5
+
 hostssl  all   all   127.0.0.1/0   md5
 
 ##Code Layout
 
 Database set up is in database_setup.py
+
 Helper functions are in utilities.py
+
 All handlers are in project.py
+
 All html files are in the templates directory
+
 Style file is in static directory
 
 ##Resources Consulted
