@@ -1,6 +1,7 @@
 # LSCPReadMe
 
 #Subjective, a Catalog Project
+
 A program to create, read, update and delete school and subject entries by users. Read is accessible to all, create is accessible to all logged in users, and update and delete are only accessible to creators of subjects and schools.
 
 The program is built using python, Flask and sqlalchemy(PostgreSQL), and can be publicly accessed at [Subjective](http://ec2-54-209-205-198.compute-1.amazonaws.com/)
@@ -23,6 +24,7 @@ The graderkey is copied into the 'Notes to Reviewer' accompanying project submis
 The app was made live using AWS LightSail (Ubuntu on a Linux remote server) using the following steps:
 
 ##Sign up and instance set up for AWS
+
 Sign up for [AWS](https://lightsail.aws.amazon.com/)
 Create an instance
 Choose Ubuntu
@@ -30,11 +32,13 @@ Rename instance
 SSH into the instance using the 'Connect using SSH' button
 
 ##Updates
+
 Run the following commands to update and upgrade packages
 sudo apt-get update
 sudo apt-get upgrade
 
 ##Installation
+
 Run the following commands to install packages needed for the project:
 sudo apt-get install apache2
 sudo apt-get install libapache2-mod-wsgi
@@ -53,6 +57,7 @@ sudo apt-get install ntp
 sudo apt-get install python-psycopg2
 
 ##Setting up Uncomplicated Firewall and access ports
+
 sudo ufw allow ssh
 sudo ufw allow 2200/tcp
 sudo ufw allow www
@@ -67,9 +72,11 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 
 ##Setting Time Zone
+
 sudo timedatectl set_timezone Etc/UTC
 
 ##User creation and giving sudo access
+
 sudo adduser grader
 sudo nano /etc/sudoers.d/grader 
 paste the following in grader file
