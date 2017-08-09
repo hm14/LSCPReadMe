@@ -157,6 +157,7 @@ All html files are in the templates directory
 Style file is in static directory
 
 ##Resources Consulted
+
 [How to deploy a flask app on ubuntu](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
  
 [How to install and use postgresql on ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
